@@ -1,8 +1,9 @@
-import { Dumbbell, Activity, Zap, Music, Heart, Flame, Target, Wind, Clock } from "lucide-react";
+import { Dumbbell, Activity, Zap, Music, Heart, Flame, Target, Wind, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
+import { useIsMobile } from "@/hooks/use-mobile";
 import musculacaoImg from "@/assets/musculacao.jpg";
 import funcionalImg from "@/assets/funcional.jpg";
 import boxeImg from "@/assets/boxe.jpg";
@@ -121,6 +122,24 @@ const activities = [
 
 const Activities = () => {
   const [selectedActivity, setSelectedActivity] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const isMobile = useIsMobile();
+  
+  const itemsPerPage = isMobile ? 1 : 3;
+  const totalPages = Math.ceil(activities.length / itemsPerPage);
+  
+  const nextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+  
+  const prevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+  
+  const visibleActivities = activities.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
 
   return (
     <section id="atividades" className="py-20 bg-secondary">
@@ -136,45 +155,86 @@ const Activities = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {activities.map((activity, index) => (
-            <ScrollReveal key={index} direction="up" delay={index * 100}>
-              <Card 
-              onClick={() => setSelectedActivity(index)}
-              className="bg-card border-border overflow-hidden group hover:shadow-[0_10px_40px_-10px_hsl(60_100%_50%/0.3)] transition-all duration-300 flex flex-col h-full cursor-pointer"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <img 
-                  src={activity.image} 
-                  alt={activity.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="bg-primary p-2 rounded">
-                      <activity.icon className="w-6 h-6 text-primary-foreground" />
+        {/* Carrossel */}
+        <div className="relative max-w-7xl mx-auto">
+          {/* Botão Anterior */}
+          <button
+            onClick={prevPage}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all hover:scale-110 shadow-lg"
+            aria-label="Modalidades anteriores"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          {/* Cards */}
+          <div className="grid md:grid-cols-3 gap-8 px-4">
+            {visibleActivities.map((activity, index) => {
+              const actualIndex = currentPage * itemsPerPage + index;
+              return (
+                <ScrollReveal key={actualIndex} direction="up" delay={index * 100}>
+                  <Card 
+                    onClick={() => setSelectedActivity(actualIndex)}
+                    className="bg-card border-border overflow-hidden group hover:shadow-[0_10px_40px_-10px_hsl(60_100%_50%/0.3)] transition-all duration-300 flex flex-col h-full cursor-pointer"
+                  >
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src={activity.image} 
+                        alt={activity.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="bg-primary p-2 rounded">
+                            <activity.icon className="w-6 h-6 text-primary-foreground" />
+                          </div>
+                          <h3 className="font-display text-3xl text-primary">
+                            {activity.title}
+                          </h3>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="font-display text-3xl text-primary">
-                      {activity.title}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-              <CardContent className="p-6 space-y-4 flex flex-col flex-1">
-                <p className="text-foreground flex-1">
-                  {activity.description}
-                </p>
-                <div className="flex items-start gap-2 pt-3 border-t border-border mt-auto">
-                  <Clock className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-muted-foreground">
-                    {activity.schedule}
-                  </p>
-                </div>
-              </CardContent>
-              </Card>
-            </ScrollReveal>
-          ))}
+                    <CardContent className="p-6 space-y-4 flex flex-col flex-1">
+                      <p className="text-foreground flex-1">
+                        {activity.description}
+                      </p>
+                      <div className="flex items-start gap-2 pt-3 border-t border-border mt-auto">
+                        <Clock className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                        <p className="text-sm text-muted-foreground">
+                          {activity.schedule}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+
+          {/* Botão Próximo */}
+          <button
+            onClick={nextPage}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 bg-primary hover:bg-primary/90 text-primary-foreground p-3 rounded-full transition-all hover:scale-110 shadow-lg"
+            aria-label="Próximas modalidades"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* Indicadores de Página */}
+          <div className="flex justify-center gap-2 mt-8">
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index)}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  currentPage === index 
+                    ? 'bg-primary w-8' 
+                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                }`}
+                aria-label={`Ir para página ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Modal de Detalhes */}

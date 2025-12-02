@@ -89,5 +89,27 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+  }
+
+  html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Prevenir scroll horizontal em todos os elementos */
+  * {
+    max-width: 100%;
+  }
+
+  /* Garantir que containers não ultrapassem a largura da viewport */
+  .container {
+    max-width: 100%;
+  }
+
+  /* Prevenir overflow em imagens e vídeos */
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
   }
 }

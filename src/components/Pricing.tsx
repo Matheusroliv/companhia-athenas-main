@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell, TableCaption } from "@/components/ui/table";
 import ScrollReveal from "./ScrollReveal";
-
+import { useIsMobile } from "@/hooks/use-mobile";
 const musculacao = [
   { label: "Anual (Recorrente)", price: "R$ 139,90" },
   { label: "Anual (Crédito)", price: "R$ 129,90" },
@@ -40,6 +40,8 @@ const natacaoHidro = [
  
 
 const Pricing = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <section id="planos" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -55,9 +57,9 @@ const Pricing = () => {
         <ScrollReveal direction="up" delay={200}>
           <Tabs defaultValue="musculacao" className="max-w-6xl mx-auto">
           <TabsList className="grid grid-cols-3 gap-2 bg-secondary">
-            <TabsTrigger value="musculacao">Musculação</TabsTrigger>
-            <TabsTrigger value="musculacaoPiscina">Musculação + Piscina</TabsTrigger>
-            <TabsTrigger value="natacaoHidro">Natação / Hidroginástica</TabsTrigger>
+            <TabsTrigger value="musculacao" className="text-xs sm:text-sm">Musculação</TabsTrigger>
+            <TabsTrigger value="musculacaoPiscina" className="text-xs sm:text-sm">Musculação + Piscina</TabsTrigger>
+            <TabsTrigger value="natacaoHidro" className="text-xs sm:text-sm">Natação / Hidro</TabsTrigger>
           </TabsList>
 
           <TabsContent value="musculacao">
@@ -66,25 +68,39 @@ const Pricing = () => {
                 <CardTitle className="font-display text-2xl text-primary font-normal">Musculação</CardTitle>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Plano</TableHead>
-                      <TableHead className="text-right">Preço</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
+                {isMobile ? (
+                  <div className="space-y-3">
                     {musculacao.map((item, idx) => (
-                      <TableRow key={idx}>
-                        <TableCell>{item.label}</TableCell>
-                        <TableCell className="text-right font-semibold">{item.price}</TableCell>
-                      </TableRow>
+                      <div key={idx} className="flex justify-between items-center py-3 border-b border-border last:border-0">
+                        <span className="text-sm">{item.label}</span>
+                        <span className="font-semibold text-primary">{item.price}</span>
+                      </div>
                     ))}
-                  </TableBody>
-                  <TableCaption>
-                    Taxa de Matrícula: R$ 59,90 • Avaliação Física: R$ 69,90 • Valores sujeitos a alterações.
-                  </TableCaption>
-                </Table>
+                    <p className="text-xs text-muted-foreground text-center pt-4">
+                      Taxa de Matrícula: R$ 59,90 • Avaliação Física: R$ 69,90 • Valores sujeitos a alterações.
+                    </p>
+                  </div>
+                ) : (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Plano</TableHead>
+                        <TableHead className="text-right">Preço</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {musculacao.map((item, idx) => (
+                        <TableRow key={idx}>
+                          <TableCell>{item.label}</TableCell>
+                          <TableCell className="text-right font-semibold">{item.price}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                    <TableCaption>
+                      Taxa de Matrícula: R$ 59,90 • Avaliação Física: R$ 69,90 • Valores sujeitos a alterações.
+                    </TableCaption>
+                  </Table>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -95,25 +111,39 @@ const Pricing = () => {
                 <CardTitle className="font-display text-2xl text-primary font-normal">Musculação + Piscina</CardTitle>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Plano</TableHead>
-                      <TableHead className="text-right">Preço</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
+                {isMobile ? (
+                  <div className="space-y-3">
                     {musculacaoPiscina.map((item, idx) => (
-                      <TableRow key={idx}>
-                        <TableCell>{item.label}</TableCell>
-                        <TableCell className="text-right font-semibold">{item.price}</TableCell>
-                      </TableRow>
+                      <div key={idx} className="flex justify-between items-center py-3 border-b border-border last:border-0">
+                        <span className="text-sm">{item.label}</span>
+                        <span className="font-semibold text-primary">{item.price}</span>
+                      </div>
                     ))}
-                  </TableBody>
-                  <TableCaption>
-                    Taxa de Matrícula: R$ 59,90 • Avaliação Física: R$ 69,90 • Valores sujeitos a alterações.
-                  </TableCaption>
-                </Table>
+                    <p className="text-xs text-muted-foreground text-center pt-4">
+                      Taxa de Matrícula: R$ 59,90 • Avaliação Física: R$ 69,90 • Valores sujeitos a alterações.
+                    </p>
+                  </div>
+                ) : (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Plano</TableHead>
+                        <TableHead className="text-right">Preço</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {musculacaoPiscina.map((item, idx) => (
+                        <TableRow key={idx}>
+                          <TableCell>{item.label}</TableCell>
+                          <TableCell className="text-right font-semibold">{item.price}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                    <TableCaption>
+                      Taxa de Matrícula: R$ 59,90 • Avaliação Física: R$ 69,90 • Valores sujeitos a alterações.
+                    </TableCaption>
+                  </Table>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -124,45 +154,77 @@ const Pricing = () => {
                 <CardTitle className="font-display text-2xl text-primary font-normal">Natação / Hidroginástica</CardTitle>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Plano</TableHead>
-                      <TableHead className="text-center">1x/sem</TableHead>
-                      <TableHead className="text-center">2x/sem</TableHead>
-                      <TableHead className="text-center">3x/sem</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>Recorrente (10x)</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 155,88</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 203,88</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 215,88</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Anual</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 129,90</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 169,90</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 179,90</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Semestral</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 159,90</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 199,90</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 209,90</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Mensal</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 179,90</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 219,90</TableCell>
-                      <TableCell className="text-center font-semibold">R$ 229,90</TableCell>
-                    </TableRow>
-                  </TableBody>
-                  <TableCaption>
-                    Recorrente: 10 parcelas • Taxa de Matrícula: R$ 59,90 • Avaliação Física: R$ 69,90 • Valores sujeitos a alterações.
-                  </TableCaption>
-                </Table>
+                {isMobile ? (
+                  <div className="space-y-4">
+                    {[
+                      { plan: "Recorrente (10x)", prices: ["R$ 155,88", "R$ 203,88", "R$ 215,88"] },
+                      { plan: "Anual", prices: ["R$ 129,90", "R$ 169,90", "R$ 179,90"] },
+                      { plan: "Semestral", prices: ["R$ 159,90", "R$ 199,90", "R$ 209,90"] },
+                      { plan: "Mensal", prices: ["R$ 179,90", "R$ 219,90", "R$ 229,90"] },
+                    ].map((item, idx) => (
+                      <div key={idx} className="border border-border rounded-lg p-4 bg-muted/30">
+                        <h4 className="font-semibold text-primary mb-3">{item.plan}</h4>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-muted-foreground">1x por semana</span>
+                            <span className="font-semibold">{item.prices[0]}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-muted-foreground">2x por semana</span>
+                            <span className="font-semibold">{item.prices[1]}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-muted-foreground">3x por semana</span>
+                            <span className="font-semibold">{item.prices[2]}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <p className="text-xs text-muted-foreground text-center pt-2">
+                      Recorrente: 10 parcelas • Taxa de Matrícula: R$ 59,90 • Avaliação Física: R$ 69,90 • Valores sujeitos a alterações.
+                    </p>
+                  </div>
+                ) : (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Plano</TableHead>
+                        <TableHead className="text-center">1x/sem</TableHead>
+                        <TableHead className="text-center">2x/sem</TableHead>
+                        <TableHead className="text-center">3x/sem</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>Recorrente (10x)</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 155,88</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 203,88</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 215,88</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Anual</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 129,90</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 169,90</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 179,90</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Semestral</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 159,90</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 199,90</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 209,90</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Mensal</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 179,90</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 219,90</TableCell>
+                        <TableCell className="text-center font-semibold">R$ 229,90</TableCell>
+                      </TableRow>
+                    </TableBody>
+                    <TableCaption>
+                      Recorrente: 10 parcelas • Taxa de Matrícula: R$ 59,90 • Avaliação Física: R$ 69,90 • Valores sujeitos a alterações.
+                    </TableCaption>
+                  </Table>
+                )}
               </CardContent>
             </Card>
           </TabsContent>

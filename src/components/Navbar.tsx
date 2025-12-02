@@ -61,7 +61,7 @@ const Navbar = () => {
             <button onClick={() => scrollToSection("planos")} className="text-foreground hover:text-primary transition-colors">
               Planos
             </button>
-            <button onClick={navigateToGallery} className="text-foreground hover:text-primary transition-colors">
+            <button onClick={() => scrollToSection("galeria")} className="text-foreground hover:text-primary transition-colors">
               Galeria
             </button>
             <button onClick={() => scrollToSection("contato")} className="text-foreground hover:text-primary transition-colors">
@@ -91,7 +91,7 @@ const Navbar = () => {
               <button onClick={() => scrollToSection("planos")} className="text-foreground hover:text-primary transition-colors text-left">
                 Planos
               </button>
-              <button onClick={navigateToGallery} className="text-foreground hover:text-primary transition-colors text-left">
+              <button onClick={() => scrollToSection("galeria")} className="text-foreground hover:text-primary transition-colors text-left">
                 Galeria
               </button>
               <button onClick={() => scrollToSection("contato")} className="text-foreground hover:text-primary transition-colors text-left">

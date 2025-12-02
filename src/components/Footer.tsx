@@ -50,7 +50,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/galeria" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="#galeria" className="text-muted-foreground hover:text-primary transition-colors">
                   Galeria
                 </a>
               </li>

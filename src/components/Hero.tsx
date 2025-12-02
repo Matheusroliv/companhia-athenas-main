@@ -14,14 +14,14 @@ const Hero = () => {
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-right"
+        className="absolute inset-0 bg-cover bg-right w-full"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/40 w-full" />
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 w-full">
         <div className="max-w-3xl">
           <ScrollReveal direction="left">
             <h1 className="font-display text-6xl md:text-8xl lg:text-9xl mb-6 text-primary leading-none">
@@ -34,10 +34,10 @@ const Hero = () => {
             </p>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={400}>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 max-w-full items-stretch">
             <Button 
               size="lg" 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-base sm:text-lg w-full sm:w-auto py-3 h-auto"
               onClick={() => scrollToSection("planos")}
             >
               COMEÇAR AGORA
@@ -45,7 +45,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold text-lg"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold text-base sm:text-lg w-full sm:w-auto whitespace-normal py-3 h-auto leading-tight"
               onClick={() => scrollToSection("atividades")}
             >
               CONHEÇA AS MODALIDADES
@@ -54,14 +54,14 @@ const Hero = () => {
               href="https://wa.me/5561982857467?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20planos%20da%20Academia%20Companhia%20Athenas."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex"
+              className="inline-flex w-full sm:w-auto"
             >
               <Button 
                 size="lg"
-                className="bg-green-600 text-white hover:bg-green-700 font-bold text-lg"
+                className="bg-green-600 text-white hover:bg-green-700 font-bold text-base sm:text-lg w-full py-3 h-auto"
               >
                 <svg
-                  className="mr-2 h-5 w-5"
+                  className="mr-2 h-5 w-5 flex-shrink-0"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                   fill="currentColor"
