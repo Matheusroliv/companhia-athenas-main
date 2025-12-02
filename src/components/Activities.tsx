@@ -4,10 +4,18 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 import { useIsMobile } from "@/hooks/use-mobile";
-import musculacaoImg from "@/assets/musculacao.jpg";
-import funcionalImg from "@/assets/funcional.jpg";
-import boxeImg from "@/assets/boxe.jpg";
-import heroImg from "@/assets/hero-gym.jpg";
+import musculacaoImg from "@/assets/modalidades/musculacao.jpg";
+import fitdanceImg from "@/assets/modalidades/fitdance.jpg";
+import powerhitImg from "@/assets/modalidades/powerhit.jpg";
+import powergapImg from "@/assets/modalidades/powergap.jpg";
+import funcionalImg from "@/assets/modalidades/pexels-rdne-6539867.jpg";
+import jumpImg from "@/assets/modalidades/jump.jpg";
+import stepImg from "@/assets/modalidades/step.jpg";
+import alongamentoImg from "@/assets/modalidades/alongamento.jpg";
+import abdominalImg from "@/assets/modalidades/abdominal.jpg";
+import aerobicImg from "@/assets/modalidades/aerobic.jpg";
+import zumbaImg from "@/assets/modalidades/zumba.jpg";
+import hitboxImg from "@/assets/modalidades/hitbox.jpg";
 
 const activities = [
   {
@@ -23,7 +31,7 @@ const activities = [
     title: "Fit Dance",
     description: "Dança fitness com coreografias animadas para queimar calorias e se divertir.",
     icon: Music,
-    image: heroImg,
+    image: fitdanceImg,
     schedule: "2ª e 4ª: 08h10 • 3ª: 17h e 20h • 5ª: 17h e 20h • 6ª: 08h10",
     detailedSchedule: "Segunda-feira: 08h10\nTerça-feira: 17h00 e 20h00\nQuarta-feira: 08h10\nQuinta-feira: 17h00 e 20h00\nSexta-feira: 08h10",
     fullDescription: "Aulas de dança fitness com coreografias empolgantes e músicas animadas. Perfeito para quem quer queimar calorias, melhorar o condicionamento cardiovascular e se divertir ao mesmo tempo. Não precisa saber dançar, nossas aulas são para todos os níveis!",
@@ -32,7 +40,7 @@ const activities = [
     title: "Power Hit Emagrecimento",
     description: "Treino de alta intensidade focado em emagrecimento e condicionamento físico.",
     icon: Flame,
-    image: funcionalImg,
+    image: powerhitImg,
     schedule: "2ª e 4ª: 09h00",
     detailedSchedule: "Segunda-feira: 09h00\nQuarta-feira: 09h00",
     fullDescription: "Treino intervalado de alta intensidade (HIIT) especialmente desenvolvido para acelerar o metabolismo e maximizar a queima de gordura. Combina exercícios aeróbicos e anaeróbicos em uma aula dinâmica e desafiadora.",
@@ -41,7 +49,7 @@ const activities = [
     title: "Power G.A.P",
     description: "Exercícios focados em Glúteos, Abdômen e Pernas para tonificação muscular.",
     icon: Target,
-    image: funcionalImg,
+    image: powergapImg,
     schedule: "2ª e 4ª: 18h15 • 3ª, 5ª e 6ª: 07h50",
     detailedSchedule: "Segunda-feira: 18h15\nTerça-feira: 07h50\nQuarta-feira: 18h15\nQuinta-feira: 07h50\nSexta-feira: 07h50",
     fullDescription: "Aula focada no fortalecimento e tonificação de Glúteos, Abdômen e Pernas. Exercícios específicos para definir e fortalecer essas regiões, melhorando postura, equilíbrio e força muscular.",
@@ -59,7 +67,7 @@ const activities = [
     title: "Power Jump",
     description: "Aulas dinâmicas no mini-trampolim para queimar calorias e melhorar o condicionamento.",
     icon: Activity,
-    image: heroImg,
+    image: jumpImg,
     schedule: "2ª e 4ª: 19h45",
     detailedSchedule: "Segunda-feira: 19h45\nQuarta-feira: 19h45",
     fullDescription: "Aula no mini-trampolim que combina diversão e exercício intenso. Trabalha todo o corpo, melhora o equilíbrio, fortalece a musculatura e queima muitas calorias com baixo impacto nas articulações.",
@@ -68,7 +76,7 @@ const activities = [
     title: "Step",
     description: "Exercícios aeróbicos com step para trabalhar membros inferiores e cardio.",
     icon: Activity,
-    image: heroImg,
+    image: stepImg,
     schedule: "3ª, 5ª e 6ª: 09h00 • 2ª e 4ª: 18h30 e 19h00",
     detailedSchedule: "Segunda-feira: 18h30 e 19h00\nTerça-feira: 09h00\nQuarta-feira: 18h30 e 19h00\nQuinta-feira: 09h00\nSexta-feira: 09h00",
     fullDescription: "Aula aeróbica com plataforma (step) que trabalha principalmente membros inferiores. Melhora condicionamento cardiovascular, coordenação motora e fortalece pernas e glúteos com coreografias dinâmicas.",
@@ -77,7 +85,7 @@ const activities = [
     title: "Alongamento",
     description: "Aulas de alongamento para flexibilidade, relaxamento e prevenção de lesões.",
     icon: Wind,
-    image: heroImg,
+    image: alongamentoImg,
     schedule: "3ª e 6ª: 18h00 • 5ª: 18h00",
     detailedSchedule: "Terça-feira: 18h00\nQuinta-feira: 18h00\nSexta-feira: 18h00",
     fullDescription: "Aula focada em alongamentos e flexibilidade. Essencial para prevenir lesões, melhorar amplitude de movimento, reduzir tensões musculares e promover relaxamento. Ideal para complementar outros treinos.",
@@ -86,7 +94,7 @@ const activities = [
     title: "Abdominal",
     description: "Treino específico para fortalecimento e definição da região abdominal.",
     icon: Target,
-    image: funcionalImg,
+    image: abdominalImg,
     schedule: "3ª e 6ª: 18h30 • 5ª: 18h30",
     detailedSchedule: "Terça-feira: 18h30\nQuinta-feira: 18h30\nSexta-feira: 18h30",
     fullDescription: "Aula dedicada ao fortalecimento da região abdominal e core. Exercícios variados para trabalhar todos os músculos do abdômen, melhorando postura, estabilidade e definição muscular.",
@@ -95,7 +103,7 @@ const activities = [
     title: "Aerobic",
     description: "Exercícios aeróbicos para melhorar condicionamento cardiovascular e resistência.",
     icon: Heart,
-    image: heroImg,
+    image: aerobicImg,
     schedule: "2ª e 4ª: 19h30",
     detailedSchedule: "Segunda-feira: 19h30\nQuarta-feira: 19h30",
     fullDescription: "Aula de ginástica aeróbica clássica com movimentos coreografados. Excelente para melhorar condicionamento cardiovascular, queimar calorias e aumentar resistência física de forma divertida.",
@@ -104,7 +112,7 @@ const activities = [
     title: "Zumba",
     description: "Dança fitness com ritmos latinos para queimar calorias de forma divertida.",
     icon: Music,
-    image: heroImg,
+    image: zumbaImg,
     schedule: "5ª: 19h30",
     detailedSchedule: "Quinta-feira: 19h30",
     fullDescription: "Aula de dança fitness com ritmos latinos como salsa, merengue, reggaeton e muito mais! Uma festa fitness que queima muitas calorias enquanto você se diverte dançando. Não precisa experiência prévia!",
@@ -113,7 +121,7 @@ const activities = [
     title: "Ritbox",
     description: "Ritmo e movimento com inspirações do boxe para um treino empolgante.",
     icon: Zap,
-    image: boxeImg,
+    image: hitboxImg,
     schedule: "Consulte horários disponíveis",
     detailedSchedule: "Horários flexíveis\nConsulte a recepção para mais informações",
     fullDescription: "Aula que combina movimentos de boxe com ritmo e música. Trabalha todo o corpo, melhora coordenação, reflexos, força e resistência. Excelente para aliviar o estresse e queimar muitas calorias!",
@@ -123,17 +131,28 @@ const activities = [
 const Activities = () => {
   const [selectedActivity, setSelectedActivity] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const isMobile = useIsMobile();
   
   const itemsPerPage = isMobile ? 1 : 3;
   const totalPages = Math.ceil(activities.length / itemsPerPage);
   
   const nextPage = () => {
-    setCurrentPage((prev) => (prev + 1) % totalPages);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentPage((prev) => (prev + 1) % totalPages);
+      setIsTransitioning(false);
+    }, 300);
   };
   
   const prevPage = () => {
-    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+      setIsTransitioning(false);
+    }, 300);
   };
   
   const visibleActivities = activities.slice(
@@ -167,11 +186,11 @@ const Activities = () => {
           </button>
 
           {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-8 px-4">
+          <div className={`grid md:grid-cols-3 gap-8 px-4 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
             {visibleActivities.map((activity, index) => {
               const actualIndex = currentPage * itemsPerPage + index;
               return (
-                <ScrollReveal key={actualIndex} direction="up" delay={index * 100}>
+                <div key={actualIndex}>
                   <Card 
                     onClick={() => setSelectedActivity(actualIndex)}
                     className="bg-card border-border overflow-hidden group hover:shadow-[0_10px_40px_-10px_hsl(60_100%_50%/0.3)] transition-all duration-300 flex flex-col h-full cursor-pointer"
@@ -180,6 +199,7 @@ const Activities = () => {
                       <img 
                         src={activity.image} 
                         alt={activity.title}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
@@ -206,7 +226,7 @@ const Activities = () => {
                       </div>
                     </CardContent>
                   </Card>
-                </ScrollReveal>
+                </div>
               );
             })}
           </div>
