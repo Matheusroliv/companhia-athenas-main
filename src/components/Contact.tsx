@@ -121,7 +121,7 @@ const Contact = () => {
             <Card className="bg-card border-border overflow-hidden">
               <CardContent className="p-0">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3838.9876543210123!2d-48.1234567!3d-15.8765432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8b776692d3a701ed!2sAcademia%20Athenas!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3838.4!2d-48.1234567!3d-15.8765432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a3b5c5c5c5c5c%3A0x8b776692d3a701ed!2sQr%20208%20Cj%201%20-%20Samambaia%20Norte%2C%20Bras%C3%ADlia%20-%20DF%2C%2072316-510!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
                   width="100%"
                   height="500"
                   style={{ border: 0 }}
@@ -133,7 +133,7 @@ const Contact = () => {
               </CardContent>
             </Card>
             <Button
-              onClick={() => window.open("https://www.google.com/maps/place/Academia+Athenas/data=!4m2!3m1!1s0x0:0x8b776692d3a701ed?sa=X&ved=1t:2428&ictx=111", "_blank")}
+              onClick={() => window.open("https://www.google.com/maps/search/?api=1&query=Qr+208+Cj+1+Samambaia+Norte+Brasília+DF+72316-510", "_blank")}
               className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90 font-bold"
               size="lg"
             >

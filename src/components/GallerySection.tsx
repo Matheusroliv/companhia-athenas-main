@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ScrollReveal from "./ScrollReveal";
 
@@ -9,13 +9,11 @@ const GallerySection = () => {
   const [modalImage, setModalImage] = useState<number | null>(null);
   const navigate = useNavigate();
 
-  // Importar todas as imagens de 0 a 41
   const images = Array.from({ length: 42 }, (_, i) => ({
     src: new URL(`../assets/${i}.jpg`, import.meta.url).href,
     alt: `Galeria Athenas ${i + 1}`,
   }));
 
-  // Mostrar apenas 6 imagens na home
   const displayImages = images.slice(0, 6);
 
   const nextImage = () => {
@@ -46,7 +44,6 @@ const GallerySection = () => {
     }
   };
 
-  // Fechar modal com ESC e navegar com setas
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -83,7 +80,7 @@ const GallerySection = () => {
         {/* Carrossel Principal */}
         <ScrollReveal direction="up" delay={200}>
           <div className="relative max-w-5xl mx-auto mb-8">
-            <div 
+            <div
               className="relative aspect-video rounded-lg overflow-hidden bg-muted cursor-pointer group"
               onClick={() => openModal(currentIndex)}
             >
@@ -92,7 +89,7 @@ const GallerySection = () => {
                 alt={displayImages[currentIndex].alt}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
-              
+
               {/* Botões de Navegação */}
               <button
                 onClick={(e) => {
@@ -104,7 +101,7 @@ const GallerySection = () => {
               >
                 <ChevronLeft size={24} />
               </button>
-              
+
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -165,7 +162,7 @@ const GallerySection = () => {
 
       {/* Modal de Imagem em Tela Cheia */}
       {modalImage !== null && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center animate-in fade-in duration-300"
           onClick={closeModal}
         >

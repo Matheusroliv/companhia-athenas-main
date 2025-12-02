@@ -9,7 +9,6 @@ const Gallery = () => {
   const [isFading, setIsFading] = useState(false);
   const [modalImage, setModalImage] = useState<number | null>(null);
 
-  // Importar todas as imagens de 0 a 41
   const images = Array.from({ length: 42 }, (_, i) => ({
     src: new URL(`../assets/${i}.jpg`, import.meta.url).href,
     alt: `Galeria Athenas ${i + 1}`,
@@ -19,14 +18,13 @@ const Gallery = () => {
     setTimeout(() => setIsVisible(true), 100);
   }, []);
 
-  // Rotacionar as 6 imagens do grid a cada 3 segundos com fade
   useEffect(() => {
     const interval = setInterval(() => {
       setIsFading(true);
       setTimeout(() => {
         setGridStartIndex((prev) => (prev + 6) % images.length);
         setIsFading(false);
-      }, 500); // Duração do fade out
+      }, 500);
     }, 3000);
 
     return () => clearInterval(interval);
@@ -64,7 +62,6 @@ const Gallery = () => {
     }
   };
 
-  // Fechar modal com ESC
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
