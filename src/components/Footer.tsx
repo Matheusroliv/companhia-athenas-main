@@ -50,6 +50,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
+                <a href="/galeria" className="text-muted-foreground hover:text-primary transition-colors">
+                  Galeria
+                </a>
+              </li>
+              <li>
                 <a href="#contato" className="text-muted-foreground hover:text-primary transition-colors">
                   Contato
                 </a>
@@ -89,9 +94,14 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-muted-foreground text-sm">
-              © 2024 Companhia Athenas. Todos os direitos reservados.
-            </p>
+            <div className="text-center md:text-left">
+              <p className="text-muted-foreground text-sm">
+                © 2024 Companhia Athenas. Todos os direitos reservados.
+              </p>
+              <p className="text-muted-foreground text-sm mt-1">
+                CNPJ: 25.451.341/0001-04
+              </p>
+            </div>
             <div className="flex gap-6 text-sm">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                 Política de Privacidade

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "./ScrollReveal";
-import heroImage from "@/assets/hero-gym.jpg";
+import heroImage from "@/assets/3.jpg";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -14,10 +14,10 @@ const Hero = () => {
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-right"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/40" />
       </div>
 
       {/* Content */}

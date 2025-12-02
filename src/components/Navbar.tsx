@@ -1,21 +1,39 @@
 import logo from "@/assets/logo.png";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 100);
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
+    setIsOpen(false);
+  };
+
+  const navigateToGallery = () => {
+    navigate('/galeria');
+    setIsOpen(false);
   };
 
   return (
@@ -24,10 +42,13 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <div className="flex items-center gap-3">
+          <button 
+            onClick={() => navigate('/')} 
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          >
             <img src={logo} alt="Companhia Athenas" className="h-12 w-12" />
             <span className="font-display text-2xl text-primary">ATHENAS</span>
-          </div>
+          </button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
@@ -39,6 +60,9 @@ const Navbar = () => {
             </button>
             <button onClick={() => scrollToSection("planos")} className="text-foreground hover:text-primary transition-colors">
               Planos
+            </button>
+            <button onClick={navigateToGallery} className="text-foreground hover:text-primary transition-colors">
+              Galeria
             </button>
             <button onClick={() => scrollToSection("contato")} className="text-foreground hover:text-primary transition-colors">
               Contato
@@ -66,6 +90,9 @@ const Navbar = () => {
               </button>
               <button onClick={() => scrollToSection("planos")} className="text-foreground hover:text-primary transition-colors text-left">
                 Planos
+              </button>
+              <button onClick={navigateToGallery} className="text-foreground hover:text-primary transition-colors text-left">
+                Galeria
               </button>
               <button onClick={() => scrollToSection("contato")} className="text-foreground hover:text-primary transition-colors text-left">
                 Contato
