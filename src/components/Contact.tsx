@@ -1,146 +1,89 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Clock, Mail, MapPin, Phone, ExternalLink } from "lucide-react";
-import { useState } from "react";
+import { Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { business, fmtTime, mapsEmbed, mapsLink, openingHours, whatsapp } from "@/data/site";
+import { useOpenStatus } from "@/hooks/use-open-status";
 import ScrollReveal from "./ScrollReveal";
+import { InstagramIcon, WhatsAppIcon } from "./icons";
 
 const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const text = encodeURIComponent(
-      `Olá! Me chamo ${name}\nEmail: ${email}\nTelefone: ${phone}\nMensagem: ${message}`,
-    );
-    window.open(`https://wa.me/5561982857467?text=${text}`, "_blank");
-  };
+  const status = useOpenStatus();
+  const { address } = business;
 
   return (
-    <section id="contato" className="py-20 bg-secondary">
-      <div className="container mx-auto px-4">
-        <ScrollReveal direction="fade">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-5xl md:text-6xl text-primary mb-4">
-              ENTRE EM CONTATO
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Venha conhecer nossa estrutura e começar sua transformação
-            </p>
-          </div>
+    <section id="contato" className="border-t border-foreground/10 bg-secondary/40 py-24 md:py-32">
+      <div className="container px-4">
+        <ScrollReveal>
+          <p className="eyebrow">Como chegar</p>
+          <h2 className="section-title mt-4">
+            Te esperamos na <span className="text-primary">QR 208</span>
+          </h2>
         </ScrollReveal>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <ScrollReveal direction="left">
-            <div className="space-y-6">
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-primary p-3 rounded">
-                    <MapPin className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1 text-foreground">Endereço</h3>
-                    <p className="text-muted-foreground">
-                      Qr 208 Cj 1 - s/n Lt 1<br />
-                      Samambaia Norte, Brasília - DF<br />
-                      CEP: 72316-510
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+        <div className="mt-12 grid gap-5 lg:grid-cols-[1fr_1.3fr]">
+          <ScrollReveal className="space-y-5">
+            <div className="glass rounded-3xl p-7">
+              <div className="flex items-center justify-between gap-4">
+                <h3 className="font-display text-3xl tracking-wide">Horário de funcionamento</h3>
+              </div>
+              <p className={`mt-1 text-sm font-medium ${status.open ? "text-[hsl(var(--success))]" : "text-foreground/60"}`}>
+                {status.label}
+              </p>
+              <dl className="mt-5 divide-y divide-foreground/10">
+                {openingHours.map((h) => {
+                  const isToday = h.days.includes(status.day);
+                  return (
+                    <div key={h.label} className={`flex justify-between py-3 ${isToday ? "font-semibold text-primary" : ""}`}>
+                      <dt>
+                        {h.label}
+                        {isToday && <span className="ml-2 text-xs uppercase tracking-widest">hoje</span>}
+                      </dt>
+                      <dd className="tabular-nums">
+                        {h.open !== undefined && h.close !== undefined ? `${fmtTime(h.open)} às ${fmtTime(h.close)}` : "Fechado"}
+                      </dd>
+                    </div>
+                  );
+                })}
+              </dl>
+            </div>
 
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-primary p-3 rounded">
-                    <Phone className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1 text-foreground">Telefone</h3>
-                    <p className="text-muted-foreground">
-                      <a
-                        href="tel:+5561982857467"
-                        className="hover:text-primary transition-colors"
-                      >
-                        (61) 98285-7467
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-primary p-3 rounded">
-                    <Mail className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1 text-foreground">E-mail</h3>
-                    <p className="text-muted-foreground">
-                      <a
-                        href="mailto:academiaathenas@gmail.com"
-                        className="hover:text-primary transition-colors"
-                      >
-                        academiaathenas@gmail.com
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-primary p-3 rounded">
-                    <Clock className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1 text-foreground">Horário</h3>
-                    <p className="text-muted-foreground">
-                      Segunda a Sexta: 5h às 22h30<br />
-                      Sábado: 7h às 14h
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+            <address className="glass space-y-4 rounded-3xl p-7 not-italic">
+              <p className="flex gap-3">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                <span>
+                  {address.street}
+                  <br />
+                  {address.district}, {address.city} - {address.region}, CEP {address.zip}
+                </span>
+              </p>
+              <a href={`tel:${business.phone}`} className="flex gap-3 hover:text-primary">
+                <Phone className="h-5 w-5 shrink-0 text-primary" /> {business.phoneLabel}
+              </a>
+              <a href={`mailto:${business.email}`} className="flex gap-3 break-all hover:text-primary">
+                <Mail className="h-5 w-5 shrink-0 text-primary" /> {business.email}
+              </a>
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+                <a href={whatsapp()} target="_blank" rel="noopener noreferrer" className="btn-whats flex-1">
+                  <WhatsAppIcon /> WhatsApp
+                </a>
+                <a href={business.instagram} target="_blank" rel="noopener noreferrer" className="btn-ghost flex-1">
+                  <InstagramIcon className="h-4 w-4" /> Instagram
+                </a>
+              </div>
+              <div className="flex">
+                <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="btn-ghost flex-1">
+                  <Navigation className="h-4 w-4" /> Traçar rota
+                </a>
+              </div>
+            </address>
           </ScrollReveal>
 
-          {/* Google Maps */}
-          <ScrollReveal direction="right">
-            <div className="lg:sticky lg:top-24 h-fit">
-            <Card className="bg-card border-border overflow-hidden">
-              <CardContent className="p-0">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3838.4!2d-48.1234567!3d-15.8765432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a3b5c5c5c5c5c%3A0x8b776692d3a701ed!2sQr%20208%20Cj%201%20-%20Samambaia%20Norte%2C%20Bras%C3%ADlia%20-%20DF%2C%2072316-510!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
-                  width="100%"
-                  height="500"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Localização da Academia Athenas"
-                ></iframe>
-              </CardContent>
-            </Card>
-            <Button
-              onClick={() => window.open("https://www.google.com/maps/search/?api=1&query=Qr+208+Cj+1+Samambaia+Norte+Brasília+DF+72316-510", "_blank")}
-              className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90 font-bold"
-              size="lg"
-            >
-              <ExternalLink className="w-5 h-5 mr-2" />
-              VER MAPA AMPLIADO
-            </Button>
-          </div>
+          <ScrollReveal delay={150} className="min-h-[360px]">
+            <iframe
+              src={mapsEmbed}
+              title="Mapa: Companhia Athenas em Samambaia Norte"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-full min-h-[360px] w-full rounded-3xl border border-foreground/10 grayscale-[0.6] invert-[0.9] hue-rotate-180"
+            />
           </ScrollReveal>
         </div>
       </div>

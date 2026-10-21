@@ -1,120 +1,69 @@
-import { Instagram, Facebook } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Facebook } from "lucide-react";
 import logo from "@/assets/logo.png";
-import ScrollReveal from "./ScrollReveal";
+import { business, whatsapp } from "@/data/site";
+import { InstagramIcon, WhatsAppIcon } from "./icons";
 
-const Footer = () => {
-  return (
-    <footer className="bg-background border-t border-border py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* Logo and Description */}
-          <ScrollReveal direction="up">
-            <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <img src={logo} alt="Companhia Athenas" className="h-12 w-12" />
-              <span className="font-display text-2xl text-primary">ATHENAS</span>
-            </div>
-            <p className="text-muted-foreground max-w-md">
-              Transforme seu corpo e mente na Companhia Athenas. 
-              Treine como um guerreiro com os melhores profissionais.
-            </p>
-            <div className="mt-4 space-y-1 text-muted-foreground">
-              <p>
-                <strong className="text-foreground">Telefone:</strong> <a className="hover:text-primary transition-colors" href="https://wa.me/5561982857467" target="_blank" rel="noopener noreferrer">(61) 98285-7467</a>
-              </p>
-              <p>
-                <strong className="text-foreground">E-mail:</strong> <a className="hover:text-primary transition-colors" href="mailto:academiaathenas@gmail.com">academiaathenas@gmail.com</a>
-              </p>
-            </div>
-          </div>
-          </ScrollReveal>
+const Footer = () => (
+  <footer className="relative overflow-hidden">
+    <div className="container px-4 py-20 text-center md:py-28">
+      <p className="eyebrow justify-center">Disciplina · Foco · Resultados</p>
+      <h2 className="mx-auto mt-6 max-w-4xl font-display text-[clamp(3rem,9vw,7rem)] leading-[0.88] tracking-wide">
+        Bora começar <span className="text-primary">essa semana?</span>
+      </h2>
+      <a
+        href={whatsapp("Olá! Quero agendar minha aula experimental na Companhia Athenas.")}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-primary mt-10"
+      >
+        Agendar aula experimental <ArrowRight className="h-4 w-4" />
+      </a>
+      <p className="mt-5 text-sm text-foreground/60">
+        ou siga{" "}
+        <a href={business.instagram} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">
+          @companhiaathenas
+        </a>{" "}
+        no Instagram
+      </p>
+    </div>
 
-          {/* Quick Links */}
-          <ScrollReveal direction="up" delay={150}>
-            <div>
-            <h3 className="font-display text-xl text-primary mb-4">LINKS RÁPIDOS</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#inicio" className="text-muted-foreground hover:text-primary transition-colors">
-                  Início
-                </a>
-              </li>
-              <li>
-                <a href="#atividades" className="text-muted-foreground hover:text-primary transition-colors">
-                  Modalidades
-                </a>
-              </li>
-              <li>
-                <a href="#planos" className="text-muted-foreground hover:text-primary transition-colors">
-                  Planos
-                </a>
-              </li>
-              <li>
-                <a href="#galeria" className="text-muted-foreground hover:text-primary transition-colors">
-                  Galeria
-                </a>
-              </li>
-              <li>
-                <a href="#contato" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contato
-                </a>
-              </li>
-            </ul>
-          </div>
-          </ScrollReveal>
-
-          {/* Social Media */}
-          <ScrollReveal direction="up" delay={300}>
-            <div>
-            <h3 className="font-display text-xl text-primary mb-4">REDES SOCIAIS</h3>
-            <div className="flex gap-4">
-              <a 
-                href="https://www.instagram.com/companhiaathenas/" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-secondary hover:bg-primary text-foreground hover:text-primary-foreground p-3 rounded transition-all"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://www.facebook.com/p/Academia-Athenas-61553968802367/" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-secondary hover:bg-primary text-foreground hover:text-primary-foreground p-3 rounded transition-all"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-          </ScrollReveal>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-center md:text-left">
-              <p className="text-muted-foreground text-sm">
-                © 2024 Companhia Athenas. Todos os direitos reservados.
-              </p>
-              <p className="text-muted-foreground text-sm mt-1">
-                CNPJ: 25.451.341/0001-04
-              </p>
-            </div>
-            <div className="flex gap-6 text-sm">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                Política de Privacidade
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                Termos de Uso
-              </a>
-            </div>
-          </div>
-        </div>
+    <div className="greek-band" />
+    <div className="container flex flex-col gap-8 px-4 py-10 md:flex-row md:items-center md:justify-between">
+      <Link to="/" className="flex items-center gap-3">
+        <img src={logo} alt="" width={40} height={40} className="h-10 w-10" loading="lazy" />
+        <span className="font-display text-2xl tracking-wider">
+          Companhia <span className="text-primary">Athenas</span>
+        </span>
+      </Link>
+      <div className="flex gap-3">
+        {[
+          { href: business.instagram, label: "Instagram", icon: <InstagramIcon /> },
+          { href: business.facebook, label: "Facebook", icon: <Facebook className="h-5 w-5" /> },
+          { href: whatsapp(), label: "WhatsApp", icon: <WhatsAppIcon /> },
+        ].map((s) => (
+          <a
+            key={s.label}
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.label}
+            className="grid h-11 w-11 place-items-center rounded-full border border-foreground/15 transition-colors hover:border-primary hover:text-primary"
+          >
+            {s.icon}
+          </a>
+        ))}
       </div>
-    </footer>
-  );
-};
+    </div>
+    <div className="container flex flex-col gap-2 px-4 pb-10 text-xs text-foreground/60 md:flex-row md:justify-between">
+      <p>
+        © {new Date().getFullYear()} {business.name} · CNPJ {business.cnpj}
+      </p>
+      <p>
+        {business.address.street}, {business.address.district} · {business.address.city}-{business.address.region}
+      </p>
+    </div>
+  </footer>
+);
 
 export default Footer;

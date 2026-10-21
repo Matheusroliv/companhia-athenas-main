@@ -1,83 +1,97 @@
-import { Button } from "@/components/ui/button";
-import ScrollReveal from "./ScrollReveal";
-import heroImage from "@/assets/3.jpg";
+import { ArrowRight, MapPin } from "lucide-react";
+import Photo from "./Photo";
+import { business, whatsapp } from "@/data/site";
+import { InstagramIcon } from "./icons";
+import { useOpenStatus } from "@/hooks/use-open-status";
+
+const stats = [
+  { value: "29", label: "anos transformando vidas" },
+  { value: "4,85★", label: "124 avaliações no Wellhub" },
+  { value: "05h", label: "abre cedo, seg a sex" },
+];
 
 const Hero = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const status = useOpenStatus();
 
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-right w-full"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/40 w-full" />
-      </div>
+    <section id="inicio" className="grain relative isolate flex min-h-[min(88svh,780px)] items-end overflow-hidden pb-12 pt-24 md:items-center md:pb-16 md:pt-28">
+      <Photo
+        name="capa"
+        alt="Fachada de vidro da Companhia Athenas Fitness na QR 208, Samambaia Norte"
+        sizes="(min-width: 768px) 60vw, 100vw"
+        loading="eager"
+        {...{ fetchpriority: "high" }}
+        className="absolute inset-0 -z-20 h-full w-full object-cover object-[50%_30%] md:left-auto md:right-0 md:w-[62%] md:object-[50%_55%] md:[mask-image:linear-gradient(to_right,transparent,black_35%)]"
+      />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-background/85 to-background/30 md:bg-gradient-to-r md:from-background md:from-35% md:via-background/40 md:via-55% md:to-transparent" />
+      <div className="absolute -left-40 top-1/3 -z-10 h-96 w-96 rounded-full bg-primary/20 blur-[120px]" aria-hidden="true" />
 
-      {/* Content */}
-      <div className="container mx-auto px-4 relative z-10 w-full">
+      <div className="container px-4">
         <div className="max-w-3xl">
-          <ScrollReveal direction="left">
-            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl mb-6 text-primary leading-none">
-              TREINE COMO UM GUERREIRO
-            </h1>
-          </ScrollReveal>
-          <ScrollReveal direction="left" delay={200}>
-            <p className="text-xl md:text-2xl text-foreground mb-8 max-w-xl">
-              Transforme seu corpo e mente na Companhia Athenas. Natação, Hidroginástica, Musculação, Jump, Power Funcional e Ritbox.
-            </p>
-          </ScrollReveal>
-          <ScrollReveal direction="up" delay={400}>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-full items-stretch">
-            <Button 
-              size="lg" 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-base sm:text-lg w-full sm:w-auto py-3 h-auto"
-              onClick={() => scrollToSection("planos")}
-            >
-              COMEÇAR AGORA
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold text-base sm:text-lg w-full sm:w-auto whitespace-normal py-3 h-auto leading-tight"
-              onClick={() => scrollToSection("atividades")}
-            >
-              CONHEÇA AS MODALIDADES
-            </Button>
+          <a
+            href="#contato"
+            className={`mb-7 inline-flex items-center gap-4 rounded-2xl border py-3 pl-4 pr-5 backdrop-blur-xl transition-colors ${
+              status.open
+                ? "border-[hsl(var(--success)/0.45)] bg-[hsl(var(--success)/0.12)] hover:bg-[hsl(var(--success)/0.18)]"
+                : "border-foreground/15 bg-foreground/5 hover:bg-foreground/10"
+            }`}
+          >
+            <span className="relative grid h-10 w-10 shrink-0 place-items-center">
+              {status.open && (
+                <span className="absolute inset-0 animate-ping rounded-full bg-[hsl(var(--success)/0.35)]" aria-hidden="true" />
+              )}
+              <span
+                className={`relative h-3.5 w-3.5 rounded-full ${status.open ? "bg-[hsl(var(--success))] shadow-[0_0_16px_hsl(var(--success))]" : "bg-muted-foreground"}`}
+              />
+            </span>
+            <span className="text-left leading-tight">
+              <span className={`block font-display text-2xl tracking-wide ${status.open ? "text-[hsl(var(--success))]" : ""}`}>
+                {status.label.split(" · ")[0]}
+              </span>
+              <span className="flex items-center gap-1.5 text-xs text-foreground/70 sm:text-sm">
+                {status.label.split(" · ")[1]}
+                <span className="text-foreground/30">·</span>
+                <MapPin className="h-3.5 w-3.5" /> {business.address.district}
+              </span>
+            </span>
+          </a>
+
+          <h1 className="font-display text-[clamp(2.75rem,7.5vw,5.75rem)] leading-[0.9] tracking-wide">
+            Academia em Samambaia.
+            <span className="block text-primary">Treine como guerreiro.</span>
+          </h1>
+
+          <p className="mt-5 max-w-lg text-base text-foreground/75 sm:text-lg">
+            Musculação, natação, hidroginástica e 11 aulas coletivas em um só lugar, com professores que acompanham o seu
+            treino de verdade.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
-              href="https://wa.me/5561982857467?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20planos%20da%20Academia%20Companhia%20Athenas."
+              href={whatsapp("Olá! Quero agendar uma aula experimental na Companhia Athenas.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full sm:w-auto"
+              className="btn-primary"
             >
-              <Button 
-                size="lg"
-                className="bg-green-600 text-white hover:bg-green-700 font-bold text-base sm:text-lg w-full py-3 h-auto"
-              >
-                <svg
-                  className="mr-2 h-5 w-5 flex-shrink-0"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  fill="currentColor"
-                >
-                  <path d="M20.52 3.482A11.87 11.87 0 0012.004 0C5.392 0 .078 5.314.078 11.926c0 2.101.55 4.154 1.594 5.96L0 24l6.3-1.645a11.837 11.837 0 005.704 1.459h.006c6.612 0 11.926-5.314 11.926-11.927a11.835 11.835 0 00-3.416-8.405zm-8.516 18.96h-.005c-1.94 0-3.84-.52-5.5-1.5l-.395-.234-3.737.976 1-3.65-.258-.374a9.958 9.958 0 01-1.536-5.287c0-5.519 4.49-10.009 10.017-10.009 2.671 0 5.182 1.04 7.07 2.927a9.943 9.943 0 012.94 7.076c-.003 5.52-4.494 10.075-10.596 10.075zM17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.671.149-.198.297-.767.967-.94 1.165-.173.198-.347.223-.644.074-.297-.15-1.255-.463-2.39-1.476-.883-.787-1.48-1.761-1.653-2.058-.173-.298-.018-.459.13-.607.134-.133.297-.347.446-.521.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.074-.149-.671-1.613-.92-2.207-.242-.58-.487-.5-.671-.51-.173-.01-.371-.011-.57-.011-.198 0-.521.074-.793.372-.273.298-1.04 1.017-1.04 2.48 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.199 5.076 4.487.709.306 1.262.49 1.694.626.712.227 1.36.195 1.872.119.571-.085 1.758-.72 2.006-1.414.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                </svg>
-                FALAR NO WHATSAPP
-              </Button>
+              Agendar aula experimental <ArrowRight className="h-4 w-4" />
+            </a>
+            <a href={business.instagram} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+              <InstagramIcon className="h-4 w-4" /> Ver no Instagram
             </a>
           </div>
-          </ScrollReveal>
+
+          <dl className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-foreground/10 pt-6">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <dt className="sr-only">{s.label}</dt>
+                <dd className="font-display text-3xl text-primary sm:text-4xl">{s.value}</dd>
+                <dd className="text-xs text-foreground/60 sm:text-sm">{s.label}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
 
-      {/* Greek Pattern Decoration */}
-      <div className="absolute bottom-0 left-0 right-0 h-2 bg-primary" />
     </section>
   );
 };
