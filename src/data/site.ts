@@ -13,7 +13,7 @@ export const business = {
     region: "DF",
     zip: "72316-510",
   },
-  geo: { lat: -15.86657, lng: -48.0506 },
+  geo: { lat: -15.86581, lng: -48.07981 },
   instagram: "https://www.instagram.com/companhiaathenas/",
   facebook: "https://www.facebook.com/p/Academia-Athenas-61553968802367/",
 };
@@ -34,8 +34,7 @@ export const whatsapp = (text = "Olá! Vim pelo site e quero saber mais sobre a 
   `https://wa.me/${business.phone.replace("+", "")}?text=${encodeURIComponent(text)}`;
 
 export const mapsLink = "https://www.google.com/maps?cid=10049613874302747117";
-const mapsQuery = `${business.name}, ${business.address.street}, ${business.address.district}, ${business.address.city} - ${business.address.region}, ${business.address.zip}`;
-export const mapsEmbed = `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&z=17&output=embed`;
+export const mapsEmbed = `https://www.google.com/maps?q=${business.geo.lat},${business.geo.lng}&z=17&output=embed`;
 
 /** 0 = domingo … 6 = sábado. Minutos desde 00:00. */
 export const openingHours: { days: number[]; label: string; open?: number; close?: number }[] = [
