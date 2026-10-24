@@ -34,7 +34,8 @@ export const whatsapp = (text = "Olá! Vim pelo site e quero saber mais sobre a 
   `https://wa.me/${business.phone.replace("+", "")}?text=${encodeURIComponent(text)}`;
 
 export const mapsLink = "https://www.google.com/maps?cid=10049613874302747117";
-export const mapsEmbed = `https://www.google.com/maps?q=${business.geo.lat},${business.geo.lng}&z=17&output=embed`;
+const mapsQuery = `${business.name}, ${business.address.street}, ${business.address.district}, ${business.address.city} - ${business.address.region}, ${business.address.zip}`;
+export const mapsEmbed = `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&z=17&output=embed`;
 
 /** 0 = domingo … 6 = sábado. Minutos desde 00:00. */
 export const openingHours: { days: number[]; label: string; open?: number; close?: number }[] = [
